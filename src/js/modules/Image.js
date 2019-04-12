@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 
+import windowResize from '../util/windowResize'
 import vert from '../../glsl/modules/image.vert'
 import frag from '../../glsl/modules/image.frag'
 import param from '../const/param'
@@ -17,12 +18,10 @@ class Image {
         this.camera = new THREE.PerspectiveCamera(
             70,
             this.width / this.height,
-            0.01,
+            0.001,
             10000
         )
-
         let cameraZ = this.height / 2 / Math.tan((70 * Math.PI) / 180 / 2)
-
         this.camera.position.set(0, 0, cameraZ)
         this.camera.lookAt(this.scene.position)
 
@@ -49,23 +48,53 @@ class Image {
         this.geometry = new THREE.PlaneBufferGeometry(
             this.width,
             this.height,
+            1,
             1
         )
 
         this.uniforms = {
+            uResolution: {
+                type: 'v2',
+                value: {
+                    x: this.width,
+                    y: this.height,
+                },
+            },
+            uImageResolution: {
+                type: 'v2',
+                value: {
+                    x: 4460,
+                    y: 2974,
+                },
+            },
             uTime: { type: 'f', value: 0 },
             uDelta: { type: 'f', value: 0 },
+            uBrightness: { type: 'f', value: param.effect.brightness.value },
+            uContrast: { type: 'f', value: param.effect.contrust.value },
+            uSaturation: { type: 'f', value: param.effect.saturation.value },
+            uBlur: { type: 'f', value: param.effect.blur.value },
             uTex: {
                 type: 't',
                 value: new THREE.TextureLoader().load('images/image.jpg'),
             },
         }
+        param.effect.brightness.gui.onChange(val => {
+            this.uniforms.uBrightness.value = val
+        })
+        param.effect.contrust.gui.onChange(val => {
+            this.uniforms.uContrast.value = val
+        })
+        param.effect.saturation.gui.onChange(val => {
+            this.uniforms.uSaturation.value = val
+        })
+        param.effect.blur.gui.onChange(val => {
+            this.uniforms.uBlur.value = val
+        })
 
         this.material = new THREE.ShaderMaterial({
             vertexShader: vert,
             fragmentShader: frag,
             uniforms: this.uniforms,
-            flatShading: true,
             side: THREE.DoubleSide,
         })
 
@@ -82,6 +111,17 @@ class Image {
         this.updateUniforms(time, delta)
 
         this.webgl.renderer.render(this.scene, this.camera, this.fbo)
+    }
+    onResize() {
+        this.width = this.webgl.width
+        this.height = this.webgl.height
+        this.camera.aspect = this.width / this.height
+        this.camera.updateProjectionMatrix()
+
+        this.uniforms.uResolution.value = {
+            x: this.width,
+            y: this.height,
+        }
     }
 }
 

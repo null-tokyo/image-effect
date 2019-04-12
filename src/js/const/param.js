@@ -3,9 +3,13 @@ import conf from './conf'
 
 class Param {
     constructor() {
-        this.cube = {
-            FogStart: { value: 0.5, min: 0.01, max: 15.0 },
-            FogEnd: { value: 12.01, min: 0.01, max: 15.0 },
+        this.effect = {
+            brightness: { value: 0.0, min: -1.0, max: 1.0 },
+            contrust: { value: 0.0, min: -1.0, max: 1.0 },
+            saturation: { value: 0.0, min: -1.0, max: 1.0 },
+            blur: { value: 0.0, min: 0.0, max: 100.0 },
+        }
+        this.brend = {
             MixBrend: { value: 0.001, min: 0.0, max: 0.9999 },
         }
         if (!conf.debugMode) return
@@ -13,7 +17,8 @@ class Param {
     }
     init() {
         this.gui = new dat.GUI()
-        this.addGUI(this.cube, 'effect')
+        this.addGUI(this.effect, 'effect')
+        this.addGUI(this.brend, 'brend')
         document.querySelector('.dg').style.zIndex = 9999
     }
     addGUI(obj, folderName) {

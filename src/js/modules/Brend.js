@@ -52,9 +52,6 @@ class Brend {
         this.createBrend()
     }
     createBrend() {
-        this.instances = 100
-
-        this.bufferGeometry = new THREE.TorusBufferGeometry(0.4, 0.1, 20, 100)
         this.geometry = new THREE.PlaneBufferGeometry(
             this.width,
             this.height,
@@ -75,11 +72,11 @@ class Brend {
             },
             uMixBrend: {
                 type: 'f',
-                value: param.cube.MixBrend.value,
+                value: param.brend.MixBrend.value,
             },
         }
 
-        param.cube.MixBrend.gui.onChange(val => {
+        param.brend.MixBrend.gui.onChange(val => {
             this.uniforms.uMixBrend.value = val
         })
 

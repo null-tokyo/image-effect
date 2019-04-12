@@ -21,8 +21,8 @@ class WebGL {
     init() {
         this.render = () => this._render()
 
-        this.width = 2048
-        this.height = 2048
+        this.width = window.innerWidth
+        this.height = window.innerHeight
         this.aspect = this.width / this.height
         this.size = 32
         this.setProps()
@@ -157,6 +157,8 @@ class WebGL {
 
         this.plane.scale.x = scale
         this.plane.scale.y = scale
+
+        this.image.onResize()
 
         this.renderer.render(this.scene, this.camera)
     }

@@ -52,20 +52,20 @@ vec4 saturation(vec4 color, float s) {
 }
 
 void main () {
-    // vec2 ratio = vec2(
-    //     min((uResolution.x / uResolution.y) / (uImageResolution.x / uImageResolution.y), 1.0),
-    //     min((uResolution.y / uResolution.x) / (uImageResolution.y / uImageResolution.x), 1.0)
-    // );
+    vec2 ratio = vec2(
+        min((uResolution.x / uResolution.y) / (uImageResolution.x / uImageResolution.y), 1.0),
+        min((uResolution.y / uResolution.x) / (uImageResolution.y / uImageResolution.x), 1.0)
+    );
 
-    // vec2 uv = vec2(
-    //     vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
-    //     vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
-    // );
+    vec2 uv = vec2(
+        vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
+        vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
+    );
 
-    vec4 color = texture2D( uTex, vUv );
+    vec4 color = texture2D( uTex, uv );
 
-    vec4 color1 = blur(vUv, vec2(uBlur / uResolution.x, 0));
-    vec4 color2 = blur(vUv, vec2(0, uBlur / uResolution.y));
+    vec4 color1 = blur(uv, vec2(uBlur / uResolution.x, 0));
+    vec4 color2 = blur(uv, vec2(0, uBlur / uResolution.y));
     color = mix(color1, color2, 0.5);
 
     //brightness

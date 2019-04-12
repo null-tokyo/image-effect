@@ -4,6 +4,7 @@ import windowResize from '../util/windowResize'
 import vert from '../../glsl/modules/image.vert'
 import frag from '../../glsl/modules/image.frag'
 import param from '../const/param'
+import { TweenLite } from 'gsap'
 
 class Image {
     constructor(webgl) {
@@ -122,6 +123,27 @@ class Image {
             x: this.width,
             y: this.height,
         }
+    }
+    start() {
+        TweenLite.set(this.uniforms.uBlur, {
+            value: 14,
+        })
+        TweenLite.set(this.uniforms.uSaturation, {
+            value: -1,
+        })
+        TweenLite.set(this.uniforms.uBrightness, {
+            value: 1,
+        })
+
+        TweenLite.to(this.uniforms.uBlur, 1.8, {
+            value: 0,
+        })
+        TweenLite.to(this.uniforms.uSaturation, 1.8, {
+            value: 0,
+        })
+        TweenLite.to(this.uniforms.uBrightness, 1.0, {
+            value: 0,
+        })
     }
 }
 

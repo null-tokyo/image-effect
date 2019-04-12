@@ -21,8 +21,8 @@ class WebGL {
     init() {
         this.render = () => this._render()
 
-        this.width = window.innerWidth
-        this.height = window.innerHeight
+        this.width = 2048
+        this.height = 2048
         this.aspect = this.width / this.height
         this.size = 32
         this.setProps()

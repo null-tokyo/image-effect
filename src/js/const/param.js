@@ -7,7 +7,9 @@ class Param {
             brightness: { value: 0.0, min: -1.0, max: 1.0 },
             contrust: { value: 0.0, min: -1.0, max: 1.0 },
             saturation: { value: 0.0, min: -1.0, max: 1.0 },
+            denoise: { value: 100.0, min: 0.0, max: 100.0 },
             blur: { value: 0.0, min: 0.0, max: 100.0 },
+            zoomBlur: { value: 0.0, min: 0.0, max: 1.0 },
         }
         this.brend = {
             MixBrend: { value: 0.001, min: 0.0, max: 0.9999 },

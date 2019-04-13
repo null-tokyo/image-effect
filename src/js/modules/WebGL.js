@@ -64,8 +64,7 @@ class WebGL {
         this.brend.uniforms.tDiffuse1 = this.image.fbo.texture
 
         this.render()
-
-        this.image.start()
+        //this.image.start()
     }
     createPlane() {
         this.uniforms = {

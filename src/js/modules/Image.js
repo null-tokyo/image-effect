@@ -74,6 +74,8 @@ class Image {
             uContrast: { type: 'f', value: param.effect.contrust.value },
             uSaturation: { type: 'f', value: param.effect.saturation.value },
             uBlur: { type: 'f', value: param.effect.blur.value },
+            uZoomBlur: { type: 'f', value: param.effect.zoomBlur.value },
+            uDenoise: { type: 'f', value: param.effect.denoise.value },
             uTex: {
                 type: 't',
                 value: new THREE.TextureLoader().load('images/image.jpg'),
@@ -88,8 +90,14 @@ class Image {
         param.effect.saturation.gui.onChange(val => {
             this.uniforms.uSaturation.value = val
         })
+        param.effect.denoise.gui.onChange(val => {
+            this.uniforms.uDenoise.value = val
+        })
         param.effect.blur.gui.onChange(val => {
             this.uniforms.uBlur.value = val
+        })
+        param.effect.zoomBlur.gui.onChange(val => {
+            this.uniforms.uZoomBlur.value = val
         })
 
         this.material = new THREE.ShaderMaterial({

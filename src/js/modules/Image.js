@@ -70,9 +70,6 @@ class Image {
             },
             uTime: { type: 'f', value: 0 },
             uDelta: { type: 'f', value: 0 },
-            uBrightness: { type: 'f', value: param.effect.brightness.value },
-            uContrast: { type: 'f', value: param.effect.contrust.value },
-            uSaturation: { type: 'f', value: param.effect.saturation.value },
             uBlur: { type: 'f', value: param.effect.blur.value },
             uZoomBlur: { type: 'f', value: param.effect.zoomBlur.value },
             uDenoise: { type: 'f', value: param.effect.denoise.value },
@@ -81,15 +78,6 @@ class Image {
                 value: new THREE.TextureLoader().load('images/image.jpg'),
             },
         }
-        param.effect.brightness.gui.onChange(val => {
-            this.uniforms.uBrightness.value = val
-        })
-        param.effect.contrust.gui.onChange(val => {
-            this.uniforms.uContrast.value = val
-        })
-        param.effect.saturation.gui.onChange(val => {
-            this.uniforms.uSaturation.value = val
-        })
         param.effect.denoise.gui.onChange(val => {
             this.uniforms.uDenoise.value = val
         })

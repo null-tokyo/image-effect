@@ -10,6 +10,9 @@ class Param {
             denoise: { value: 100.0, min: 0.0, max: 100.0 },
             blur: { value: 0.0, min: 0.0, max: 100.0 },
             zoomBlur: { value: 0.0, min: 0.0, max: 1.0 },
+            shiftR: { value: 0.0, min: -0.01, max: 0.01 },
+            shiftG: { value: 0.0, min: -0.01, max: 0.01 },
+            shiftB: { value: 0.0, min: -0.01, max: 0.01 },
         }
         this.brend = {
             MixBrend: { value: 0.001, min: 0.0, max: 0.9999 },

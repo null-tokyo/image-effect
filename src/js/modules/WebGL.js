@@ -71,7 +71,33 @@ class WebGL {
             uTex: { type: 't', value: this.brend.texture },
             uTime: { type: 'f', value: 0 },
             uDelta: { type: 'f', value: 0 },
+            uShiftR: { type: 'f', value: param.effect.shiftR.value },
+            uShiftG: { type: 'f', value: param.effect.shiftG.value },
+            uShiftB: { type: 'f', value: param.effect.shiftB.value },
+            uBrightness: { type: 'f', value: param.effect.brightness.value },
+            uContrast: { type: 'f', value: param.effect.contrust.value },
+            uSaturation: { type: 'f', value: param.effect.saturation.value },
         }
+
+        param.effect.shiftR.gui.onChange(val => {
+            this.uniforms.uShiftR.value = val
+        })
+        param.effect.shiftG.gui.onChange(val => {
+            this.uniforms.uShiftG.value = val
+        })
+        param.effect.shiftB.gui.onChange(val => {
+            this.uniforms.uShiftB.value = val
+        })
+
+        param.effect.brightness.gui.onChange(val => {
+            this.uniforms.uBrightness.value = val
+        })
+        param.effect.contrust.gui.onChange(val => {
+            this.uniforms.uContrast.value = val
+        })
+        param.effect.saturation.gui.onChange(val => {
+            this.uniforms.uSaturation.value = val
+        })
 
         this.geometry = new THREE.PlaneBufferGeometry(
             this.width,

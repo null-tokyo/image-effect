@@ -2,9 +2,6 @@ varying vec2 vUv;
 uniform sampler2D uTex;
 uniform vec2 uResolution;
 uniform vec2 uImageResolution;
-uniform float uBrightness;
-uniform float uContrast;
-uniform float uSaturation;
 uniform float uDenoise;
 uniform float uBlur;
 uniform float uZoomBlur;
@@ -31,35 +28,6 @@ vec4 blur(vec2 uv, vec2 delta) {
     color = color / total;
     color.rgb /= color.a + 0.00001;
 
-    return color;
-}
-
-/**
-* contrust
-* @param color {vec4}
-* @param c {float} -1.0 ~ 1.0;
-*/
-vec4 contrust(vec4 color, float c) {
-    if (c > 0.0) {
-        color.rgb = (color.rgb - 0.5) / (1.0 - c) + 0.5;
-    } else {
-        color.rgb = (color.rgb - 0.5) * (1.0 + c) + 0.5;
-    }
-    return color;
-}
-
-/**
-* saturation
-* @param color {vec4}
-* @param s {float} -1.0 ~ 1.0;
-*/
-vec4 saturation(vec4 color, float s) {
-    float avarage = (color.r + color.g + color.b) / 3.0;
-    if(uSaturation > 0.0) {
-        color.rgb += (avarage - color.rgb) * (1.0 - 1.0 / (1.001 - uSaturation));
-    } else {
-        color.rgb += (avarage - color.rgb) * (-uSaturation);
-    }
     return color;
 }
 
@@ -132,15 +100,6 @@ void main () {
 
     //denoise
     //color = denoise(uv, uResolution, uDenoise);
-
-    //brightness
-    color.rgb += uBrightness;
-
-    //contrust
-    color = contrust(color, uContrast);
-
-    //saturation
-    color = saturation(color, uSaturation);
 
     gl_FragColor = color;
 }

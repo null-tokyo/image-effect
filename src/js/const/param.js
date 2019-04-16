@@ -1,4 +1,4 @@
-import dat from 'dat-gui'
+import dat from 'dat.gui'
 import conf from './conf'
 
 class Param {

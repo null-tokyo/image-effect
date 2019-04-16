@@ -72,6 +72,7 @@
     "@babel/polyfill": "^7.2.5",
     "barba.js": "^1.0.0",
     "dat-gui": "^0.5.0",
+    "dat.gui": "^0.7.6",
     "fastclick": "^1.0.6",
     "gsap": "^2.0.2",
     "intersection-observer": "^0.5.1",
